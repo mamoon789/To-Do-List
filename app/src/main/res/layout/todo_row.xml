@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="todo"
+            type="com.example.todolist.models.ToDo" />
+
+        <variable
+            name="viewModel"
+            type="com.example.todolist.viewmodel.ToDoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        todo="@{todo}"
+        viewModel="@{viewModel}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingDefaultResource">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{todo.title}"
+            android:textAlignment="viewStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:translationZ="10dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/tvDatee"
+            app:layout_constraintEnd_toStartOf="@+id/cbCompleted"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvToDo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{todo.todo}"
+            android:textAlignment="viewStart"
+            android:translationZ="10dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/view"
+            app:layout_constraintEnd_toStartOf="@+id/cbCompleted"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDatee" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvToDo"
+            tools:layout_editor_absoluteX="48dp" />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbCompleted"
+            todo="@{todo}"
+            viewModel="@{viewModel}"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:checked="@{todo.completed}"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDatee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{todo.date}"
+            app:layout_constraintBottom_toTopOf="@+id/tvToDo"
+            app:layout_constraintEnd_toStartOf="@+id/tvCategoryy"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCategoryy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{todo.category}"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDatee"
+            app:layout_constraintEnd_toStartOf="@+id/tvPriorityy"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvDatee"
+            app:layout_constraintTop_toTopOf="@+id/tvDatee" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPriorityy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{todo.priority}"
+            priority="@{todo.priority}"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCategoryy"
+            app:layout_constraintEnd_toStartOf="@+id/cbCompleted"
+            app:layout_constraintStart_toEndOf="@+id/tvCategoryy"
+            app:layout_constraintTop_toTopOf="@+id/tvCategoryy" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

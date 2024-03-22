@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="fragment"
+            type="com.example.todolist.fragments.AddFragment" />
+
+        <variable
+            name="viewModel"
+            type="com.example.todolist.viewmodel.ToDoViewModel" />
+
+        <variable
+            name="isUpdateFlow"
+            type="Boolean" />
+
+        <variable
+            name="categoryAdapter"
+            type="android.widget.ArrayAdapter" />
+
+        <variable
+            name="priorityAdapter"
+            type="android.widget.ArrayAdapter" />
+
+        <variable
+            name="loader"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.AddFragment">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:text="Title"
+            app:layout_constraintBottom_toTopOf="@+id/etTitle"
+            app:layout_constraintEnd_toEndOf="@+id/etTitle"
+            app:layout_constraintStart_toStartOf="@+id/etTitle"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etTitle"
+            viewModel="@{viewModel}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/field"
+            android:ems="10"
+            android:inputType="text"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:text="@{viewModel.todoTitle}"
+            app:layout_constraintBottom_toTopOf="@+id/tvCategory"
+            app:layout_constraintEnd_toEndOf="@+id/tvCategory"
+            app:layout_constraintStart_toStartOf="@+id/tvCategory"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCategory"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:text="Category"
+            app:layout_constraintBottom_toTopOf="@+id/spCategory"
+            app:layout_constraintEnd_toEndOf="@+id/spCategory"
+            app:layout_constraintStart_toStartOf="@+id/spCategory"
+            app:layout_constraintTop_toBottomOf="@+id/etTitle" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spCategory"
+            selection="@{viewModel.todoCategory}"
+            viewModel="@{viewModel}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adapter="@{categoryAdapter}"
+            android:background="@drawable/spinner"
+            app:layout_constraintBottom_toTopOf="@+id/tvTodo"
+            app:layout_constraintEnd_toEndOf="@+id/tvTodo"
+            app:layout_constraintStart_toStartOf="@+id/tvTodo"
+            app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTodo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:text="Todo"
+            app:layout_constraintBottom_toTopOf="@+id/etTodo"
+            app:layout_constraintEnd_toEndOf="@+id/etTodo"
+            app:layout_constraintStart_toStartOf="@+id/etTodo"
+            app:layout_constraintTop_toBottomOf="@+id/spCategory" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etTodo"
+            viewModel="@{viewModel}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/field"
+            android:inputType="text"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:text="@{viewModel.todoTodo}"
+            app:layout_constraintBottom_toTopOf="@+id/tvDate"
+            app:layout_constraintEnd_toEndOf="@+id/tvDate"
+            app:layout_constraintStart_toStartOf="@+id/tvDate"
+            app:layout_constraintTop_toBottomOf="@+id/tvTodo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDate"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:text="Date"
+            app:layout_constraintBottom_toTopOf="@+id/etDate"
+            app:layout_constraintEnd_toEndOf="@+id/etDate"
+            app:layout_constraintStart_toStartOf="@+id/etDate"
+            app:layout_constraintTop_toBottomOf="@+id/etTodo" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/etDate"
+            viewModel="@{viewModel}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/field"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:text="@{viewModel.todoDate}"
+            app:layout_constraintBottom_toTopOf="@+id/tvPriority"
+            app:layout_constraintEnd_toEndOf="@+id/tvPriority"
+            app:layout_constraintStart_toStartOf="@+id/tvPriority"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPriority"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:text="Priority"
+            app:layout_constraintBottom_toTopOf="@+id/spPriority"
+            app:layout_constraintEnd_toEndOf="@+id/spPriority"
+            app:layout_constraintStart_toStartOf="@+id/spPriority"
+            app:layout_constraintTop_toBottomOf="@+id/etDate" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spPriority"
+            selection="@{viewModel.todoPriority}"
+            viewModel="@{viewModel}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="48dp"
+            android:adapter="@{priorityAdapter}"
+            android:background="@drawable/spinner"
+            app:layout_constraintBottom_toTopOf="@+id/btSave"
+            app:layout_constraintEnd_toEndOf="@+id/btSave"
+            app:layout_constraintStart_toStartOf="@+id/btSave"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriority" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btSave"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            viewModel="@{viewModel}"
+            isUpdateFlow="@{isUpdateFlow}"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/field"
+            android:backgroundTint="@android:color/holo_green_light"
+            android:text="@{isUpdateFlow?`Update`:`Save`}"
+            app:layout_constraintBottom_toTopOf="@+id/btDelete"
+            app:layout_constraintEnd_toEndOf="@+id/btDelete"
+            app:layout_constraintStart_toStartOf="@+id/btDelete"
+            app:layout_constraintTop_toBottomOf="@+id/spPriority" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btDelete"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            viewModel="@{viewModel}"
+            isUpdateFlow="@{isUpdateFlow}"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/field"
+            android:backgroundTint="@android:color/holo_red_light"
+            android:text="Delete"
+            android:visibility="@{isUpdateFlow?View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btSave" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{loader? View.VISIBLE: View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

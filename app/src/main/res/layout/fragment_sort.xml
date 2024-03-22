@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.example.todolist.fragments.SortFragment.SortOption" />
+        <variable
+            name="dialogFragment"
+            type="com.example.todolist.fragments.SortFragment" />
+        <variable
+            name="viewModel"
+            type="com.example.todolist.viewmodel.ToDoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/priority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.sortOption == SortOption.PRIORITY }"
+                viewModel="@{viewModel}"
+                sortOption="@{SortOption.PRIORITY}"
+                dialogFragment="@{dialogFragment}"
+                android:text="Priority" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.sortOption == SortOption.DATE }"
+                viewModel="@{viewModel}"
+                sortOption="@{SortOption.DATE}"
+                dialogFragment="@{dialogFragment}"
+                android:text="Date" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/completed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@{viewModel.sortOption == SortOption.COMPLETED }"
+                viewModel="@{viewModel}"
+                sortOption="@{SortOption.COMPLETED}"
+                dialogFragment="@{dialogFragment}"
+                android:text="Completed" />
+
+        </RadioGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
